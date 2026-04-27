@@ -1,7 +1,7 @@
 {
   "name": "typedoc-hybrid-source-links",
-  "version": "1.0.0",
-  "description": "Hybrid TypeDoc source-link generator for local VS Code links and GitHub blob links, with health checks and AI-context-safe docs output.",
+  "version": "1.0.1",
+  "description": "Hybrid TypeDoc source-link toolkit for local VS Code links, GitHub blob links, AI-agent TypeDoc JSON, and Codex-compatible documentation workflows.",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -13,17 +13,47 @@
   },
   "keywords": [
     "typedoc",
-    "documentation",
-    "source-links",
-    "vscode",
-    "github",
-    "ai-context",
+    "sourceLinkTemplate",
+    "typescript",
+    "api-documentation",
+    "codex",
+    "agents-md",
+    "ai-coding-agent",
+    "claude-code",
+    "cursor",
+    "cline",
+    "github-pages",
     "developer-tools"
   ],
   "files": [
     "bin",
     "templates",
     "README.md",
-    "LICENSE"
-  ]
+    "LICENSE",
+    "docs",
+    "benchmark.json",
+    "AGENTS.template.md",
+    "README_SECTION.template.md",
+    "HEALTH_REPORT.md"
+  ],
+  "author": "xraisen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xraisen/typedoc-hybrid-source-links.git"
+  },
+  "bugs": {
+    "url": "git+https://github.com/xraisen/typedoc-hybrid-source-links/issues"
+  },
+  "homepage": "git+https://github.com/xraisen/typedoc-hybrid-source-links#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "typedoc": ">=0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "typedoc": {
+      "optional": false
+    }
+  }
 }
