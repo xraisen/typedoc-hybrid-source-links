@@ -15,6 +15,94 @@
 
 ---
 
+## Companion prerequisite: Repo A
+
+For the **complete benchmarked workflow**, install this toolkit together with:
+
+```txt
+ai-code-intelligence-toolkit
+```
+
+Repo B can run standalone for TypeDoc hybrid source links. However, the full benchmarked AI-agent workflow uses Repo B together with Repo A:
+
+```txt
+Repo A = GraphRAG/code graph + smart preflight + leak checking
+Repo B = TypeDoc local/GitHub source links + docs health
+```
+
+### Relationship
+
+| Setup | Supported? | Notes |
+|---|---:|---|
+| Repo B only | Yes | Local/GitHub TypeDoc source links work independently. |
+| Repo A only | Yes | AI graph/preflight tooling works; TypeDoc commands require a compatible TypeDoc setup. |
+| Repo A + Repo B | Recommended | This is the full validated workflow used for the benchmark images below. |
+
+Install both for the full workflow:
+
+```bash
+npm install --save-dev typedoc-hybrid-source-links ai-code-intelligence-toolkit typedoc
+npx typedoc-hybrid-install --target . --overwrite
+npx ai-code-intel-install --target . --overwrite
+```
+
+Run the full health gate:
+
+```bash
+npm run typedoc:health
+npm run typedoc:doctor
+npm run ai:graph:build
+npm run ai:graph:doctor
+npm run ai:graph:check-leaks
+```
+
+---
+
+## Benchmark images
+
+Place benchmark images in this repo at:
+
+```txt
+docs/assets/repo-performance-benchmark-before-vs-after.png
+docs/assets/repo-comparison-and-ecosystem-analysis.png
+```
+
+Recommended repo structure:
+
+```txt
+typedoc-hybrid-source-links/
+├── docs/
+│   └── assets/
+│       ├── repo-performance-benchmark-before-vs-after.png
+│       └── repo-comparison-and-ecosystem-analysis.png
+├── scripts/
+├── templates/
+├── bin/
+├── README.md
+└── LICENSE
+```
+
+Then embed them in this README:
+
+```md
+![Before vs After: Repo A + Repo B Benchmark](docs/assets/repo-performance-benchmark-before-vs-after.png)
+
+![Repo A + Repo B vs Popular Coding-Agent Ecosystems](docs/assets/repo-comparison-and-ecosystem-analysis.png)
+```
+
+### Before vs After benchmark
+
+![Before vs After: Repo A + Repo B Benchmark](docs/assets/repo-performance-benchmark-before-vs-after.png)
+
+### Public ecosystem comparison
+
+![Repo A + Repo B vs Popular Coding-Agent Ecosystems](docs/assets/repo-comparison-and-ecosystem-analysis.png)
+
+> The images are visual summaries of local validation logs and public TypeDoc/model/tool sources. They should be treated as workflow benchmarks, not universal model-IQ benchmarks.
+
+
+---
+
 ## Why this exists
 
 TypeDoc has excellent support for TypeScript documentation and source links, but real repositories often need two different source-link behaviors:
