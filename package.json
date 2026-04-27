@@ -1,0 +1,29 @@
+{
+  "name": "typedoc-hybrid-source-links",
+  "version": "1.0.0",
+  "description": "Hybrid TypeDoc source-link generator for local VS Code links and GitHub blob links, with health checks and AI-context-safe docs output.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "typedoc-hybrid-install": "./bin/install.mjs"
+  },
+  "scripts": {
+    "install:toolkit": "node bin/install.mjs",
+    "smoke": "node bin/smoke-test.mjs"
+  },
+  "keywords": [
+    "typedoc",
+    "documentation",
+    "source-links",
+    "vscode",
+    "github",
+    "ai-context",
+    "developer-tools"
+  ],
+  "files": [
+    "bin",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ]
+}
