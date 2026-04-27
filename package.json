@@ -1,7 +1,7 @@
 {
   "name": "typedoc-hybrid-source-links",
-  "version": "1.0.1",
-  "description": "Hybrid TypeDoc source-link toolkit for local VS Code links, GitHub blob links, AI-agent TypeDoc JSON, and Codex-compatible documentation workflows.",
+  "version": "1.0.2",
+  "description": "Hybrid TypeDoc source-link toolkit for local VS Code links, GitHub source links, TypeDoc health checks, and AI-agent documentation workflows. Tested with Codex CLI and Codex Windows app workflow.",
   "type": "module",
   "license": "MIT",
   "bin": {
@@ -13,47 +13,35 @@
   },
   "keywords": [
     "typedoc",
-    "sourceLinkTemplate",
+    "sourcelinktemplate",
     "typescript",
     "api-documentation",
     "codex",
     "agents-md",
     "ai-coding-agent",
-    "claude-code",
-    "cursor",
-    "cline",
     "github-pages",
+    "vscode",
     "developer-tools"
   ],
   "files": [
-    "bin",
-    "templates",
-    "README.md",
     "LICENSE",
-    "docs",
+    "README.md",
+    "TRADEMARKS.md",
+    "VALIDATION_REPORT.md",
     "benchmark.json",
-    "AGENTS.template.md",
-    "README_SECTION.template.md",
-    "HEALTH_REPORT.md"
+    "bin",
+    "docs",
+    "templates"
   ],
-  "author": "xraisen",
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xraisen/typedoc-hybrid-source-links.git"
   },
   "bugs": {
-    "url": "git+https://github.com/xraisen/typedoc-hybrid-source-links/issues"
+    "url": "https://github.com/xraisen/typedoc-hybrid-source-links/issues"
   },
-  "homepage": "git+https://github.com/xraisen/typedoc-hybrid-source-links#readme",
-  "engines": {
-    "node": ">=20"
-  },
-  "peerDependencies": {
-    "typedoc": ">=0.25.0"
-  },
-  "peerDependenciesMeta": {
-    "typedoc": {
-      "optional": false
-    }
-  }
+  "homepage": "https://github.com/xraisen/typedoc-hybrid-source-links#readme"
 }

@@ -1,43 +1,36 @@
-# Release Validation Report
+# Validation Report — v1.0.2
 
-Generated for the fresh GitHub-ready first release packages.
+Validated package health checks performed in the packaging environment.
 
-## Packages
+## Scope
 
-- `ai-code-intelligence-toolkit`
-- `typedoc-hybrid-source-links`
+- README updated with evidence-safe benchmark wording.
+- Product names use actual names only.
+- Claims limited to Codex CLI and Codex Windows app workflow.
+- Trademark/affiliation notice added.
+- Benchmark images regenerated without vendor logos.
+- Old duplicate benchmark image filenames removed.
+- Token/cost positioning corrected: precision first; lower exposure is a side effect.
 
-## Checks Run
+## Packaged images
 
-```bash
-find . -name '*.mjs' -print0 | xargs -0 node --check
-node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"
-node -e "JSON.parse(require('fs').readFileSync('templates/package.scripts.json','utf8'))"
-npm run smoke
-```
+- `docs/assets/codex-windows-tested-benchmark.png`
+- `docs/assets/precision-workflow-diagram.png`
 
-## Result
 
-- `typedoc-hybrid-source-links`: PASS
-- `ai-code-intelligence-toolkit`: PASS
+## Automated validation
 
-## Smoke Test Coverage
+FAILED
 
-`typedoc-hybrid-source-links` installed into a temporary fixture and ran:
+- README.md: contains banned wording official OpenAI
 
-```bash
-npm run typedoc:health
-```
+## Automated validation v1.0.2 final
 
-`ai-code-intelligence-toolkit` installed into a temporary fixture and ran:
+PASS
 
-```bash
-npm run typedoc:health
-npm run ai:graph:build
-npm run ai:graph:doctor
-npm run ai:graph:check-leaks
-```
-
-## Sanitization
-
-The packages were rebuilt as generic publishable repos with fresh README.md, AGENTS snippets, MIT license, and no app-specific documentation content.
+- README wording check: PASS
+- Image path check: PASS
+- package.json parse: PASS
+- benchmark.json parse: PASS
+- node --check all `.mjs` files: PASS
+- npm run smoke: PASS
