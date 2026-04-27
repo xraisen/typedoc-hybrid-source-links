@@ -1,44 +1,77 @@
 # TypeDoc Hybrid Source Links
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![TypeDoc](https://img.shields.io/badge/TypeDoc-supported-blue.svg)](https://typedoc.org/)
+[![TypeDoc](https://img.shields.io/badge/TypeDoc-sourceLinkTemplate-blue.svg)](https://typedoc.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20-green.svg)](https://nodejs.org/)
+[![AI Docs](https://img.shields.io/badge/AI%20Docs-local%20%2B%20GitHub%20links-teal)](#why-this-exists)
 
-**TypeDoc Hybrid Source Links** is a reusable TypeDoc helper toolkit that generates different source-link modes for different environments:
+**TypeDoc Hybrid Source Links** is a reusable TypeDoc helper toolkit for **local VS Code source links**, **GitHub blob source links**, **AI-agent TypeDoc JSON**, and **documentation health checks**.
 
-- **Local mode:** TypeDoc source links open files directly in VS Code using `vscode://file/...`.
-- **GitHub mode:** TypeDoc source links open files on GitHub using `https://github.com/<owner>/<repo>/blob/<revision>/<path>#L<line>`.
-- **Health mode:** validates configs, helper scripts, generated output, and link mode behavior.
-- **AI context mode:** allows tolerant local `typedoc-api.json` generation for AI-agent context without blocking on unrelated app TypeScript errors.
+It solves a common documentation problem:
 
-> **Tagline:** Local docs open in VS Code. Public docs open in GitHub.
+> Local developers need docs links that open in VS Code. Public docs need links that open in GitHub.
 
 ---
 
-## Companion prerequisite: Repo A
+## SEO keywords / problems this solves
 
-For the **complete benchmarked workflow**, install this toolkit together with:
+This project is built for developers searching for:
+
+- TypeDoc sourceLinkTemplate
+- TypeDoc GitHub source links
+- TypeDoc VS Code file links
+- TypeDoc local source links
+- TypeDoc JSON for AI agents
+- AI coding agent documentation context
+- TypeScript API documentation
+- TypeDoc config generator
+- TypeDoc health check
+- GitHub Pages TypeDoc source links
+- local docs open in VS Code
+- public docs open in GitHub
+- Codex TypeDoc context
+- Claude Code TypeDoc context
+- Cursor TypeDoc docs
+
+---
+
+## Companion prerequisite: AI Code Intelligence Toolkit
+
+For the **complete validated AI-agent workflow**, install this toolkit together with:
 
 ```txt
 ai-code-intelligence-toolkit
 ```
 
-Repo B can run standalone for TypeDoc hybrid source links. However, the full benchmarked AI-agent workflow uses Repo B together with Repo A:
+This repository focuses on:
 
 ```txt
-Repo A = GraphRAG/code graph + smart preflight + leak checking
-Repo B = TypeDoc local/GitHub source links + docs health
+TypeDoc local VS Code source links
+GitHub blob source links
+typedoc:health
+typedoc:doctor
+typedoc:check-local
+AI-context-safe TypeDoc JSON
 ```
 
-### Relationship
+The companion repository focuses on:
+
+```txt
+GraphRAG/code graph
+smart ai:preflight routing
+ai:spec
+graph doctor
+generated-file leak checks
+MCP-ready code intelligence
+```
 
 | Setup | Supported? | Notes |
 |---|---:|---|
-| Repo B only | Yes | Local/GitHub TypeDoc source links work independently. |
-| Repo A only | Yes | AI graph/preflight tooling works; TypeDoc commands require a compatible TypeDoc setup. |
-| Repo A + Repo B | Recommended | This is the full validated workflow used for the benchmark images below. |
+| `typedoc-hybrid-source-links` only | Yes | Local/GitHub TypeDoc source links work independently. |
+| `ai-code-intelligence-toolkit` only | Yes | AI graph/preflight tooling works; TypeDoc commands need compatible TypeDoc tooling. |
+| Both together | **Recommended** | This is the full benchmarked workflow shown below. |
 
-Install both for the full workflow:
+Install both:
 
 ```bash
 npm install --save-dev typedoc-hybrid-source-links ai-code-intelligence-toolkit typedoc
@@ -46,186 +79,149 @@ npx typedoc-hybrid-install --target . --overwrite
 npx ai-code-intel-install --target . --overwrite
 ```
 
-Run the full health gate:
-
-```bash
-npm run typedoc:health
-npm run typedoc:doctor
-npm run ai:graph:build
-npm run ai:graph:doctor
-npm run ai:graph:check-leaks
-```
-
 ---
 
 ## Benchmark images
 
-Place benchmark images in this repo at:
+The images below are intentionally embedded with **relative paths**, not `https://github.com/.../blob/main/...` URLs.
+
+Why? Because hardcoded GitHub blob URLs break when:
+
+- the file is not committed yet,
+- the default branch is not `main`,
+- the repo is forked,
+- the asset filename differs,
+- GitHub cache has not refreshed.
+
+Put the PNGs here:
 
 ```txt
 docs/assets/repo-performance-benchmark-before-vs-after.png
 docs/assets/repo-comparison-and-ecosystem-analysis.png
 ```
 
-Recommended repo structure:
+Then this README will render correctly on GitHub.
 
-```txt
-typedoc-hybrid-source-links/
-├── docs/
-│   └── assets/
-│       ├── repo-performance-benchmark-before-vs-after.png
-│       └── repo-comparison-and-ecosystem-analysis.png
-├── scripts/
-├── templates/
-├── bin/
-├── README.md
-└── LICENSE
-```
-
-Then embed them in this README:
-
-```md
-![Before vs After: Repo A + Repo B Benchmark](docs/assets/repo-performance-benchmark-before-vs-after.png)
-
-![Repo A + Repo B vs Popular Coding-Agent Ecosystems](docs/assets/repo-comparison-and-ecosystem-analysis.png)
-```
-
-### Before vs After benchmark
+### Before vs After: Repo A + Repo B workflow benchmark
 
 ![Before vs After: Repo A + Repo B Benchmark](docs/assets/repo-performance-benchmark-before-vs-after.png)
 
-### Public ecosystem comparison
+### Public comparison with popular coding-agent ecosystems
 
 ![Repo A + Repo B vs Popular Coding-Agent Ecosystems](docs/assets/repo-comparison-and-ecosystem-analysis.png)
 
-> The images are visual summaries of local validation logs and public TypeDoc/model/tool sources. They should be treated as workflow benchmarks, not universal model-IQ benchmarks.
-
+> These images summarize local validation logs and public TypeDoc/model/tool sources. They are workflow benchmarks, not universal model-IQ benchmarks.
 
 ---
 
 ## Why this exists
 
-TypeDoc has excellent support for TypeScript documentation and source links, but real repositories often need two different source-link behaviors:
+TypeDoc can generate documentation and source links, but most teams need different source-link behavior in different environments:
 
-1. **Developers working locally** want documentation links to jump directly into local files.
-2. **CI, public docs, GitHub Pages, and teammates** need source links that work in a browser.
-
-This toolkit solves that by generating environment-specific TypeDoc configs instead of forcing one source-link strategy for all contexts.
-
-It is especially useful when TypeDoc output is used by AI coding agents, because clickable local links and stable GitHub links make source navigation more precise.
-
----
-
-## What this toolkit includes
-
-| Tool | Purpose |
+| Environment | Desired behavior |
 |---|---|
-| `scripts/typedoc-source-config.mjs` | Generates local, GitHub, or auto TypeDoc configs from a base config. |
-| `scripts/typedoc-source-link-doctor.mjs` | Validates source-link config behavior. |
-| `scripts/typedoc-tool-health.mjs` | Health checker for the entire hybrid TypeDoc toolchain. |
-| `scripts/ai/typedoc-local-source-check.mjs` | Confirms local TypeDoc JSON/source links are safe for local AI context. |
-| `typedoc.json` | Base TypeDoc config for app/library docs. |
-| `typedoc-frontend.json` | Optional frontend-specific TypeDoc config. |
-| `typedoc-ci.json` | CI-safe TypeDoc config. |
-| `typedoc-strict.json` | Strict docs validation config. |
-| `tsconfig.doc.json` | Documentation-specific TypeScript config. |
+| Local development | Click docs source links and open files in VS Code. |
+| AI-agent worktree | Let Codex, Claude Code, Cursor, Cline, or RooCode inspect local files precisely. |
+| GitHub Pages / CI docs | Click docs source links and open files in GitHub. |
+| Public documentation | Avoid local machine paths and use stable browser links. |
+
+This toolkit generates separate configs for each mode instead of forcing one link strategy everywhere.
 
 ---
 
-## Installation
+## What it installs
 
-### Install from npm after publishing
+```txt
+scripts/typedoc-source-config.mjs
+scripts/typedoc-source-link-doctor.mjs
+scripts/typedoc-tool-health.mjs
+scripts/ai/typedoc-local-source-check.mjs
+typedoc.json
+typedoc-frontend.json
+typedoc-ci.json
+typedoc-strict.json
+tsconfig.doc.json
+```
+
+---
+
+## Install
+
+### From npm after publishing
 
 ```bash
 npm install --save-dev typedoc-hybrid-source-links typedoc
 npx typedoc-hybrid-install --target . --overwrite
 ```
 
-### Install from a local clone
+### From source
 
 ```bash
 git clone https://github.com/xraisen/typedoc-hybrid-source-links.git
 cd typedoc-hybrid-source-links
-
 node bin/install.mjs --target /path/to/your/repo --overwrite
 ```
 
 ---
 
-## Package scripts added to the target repo
-
-```json
-{
-  "typedoc:config:local": "node scripts/typedoc-source-config.mjs local typedoc.json",
-  "typedoc:config:github": "node scripts/typedoc-source-config.mjs github typedoc.json",
-  "typedoc:config:auto": "node scripts/typedoc-source-config.mjs auto typedoc.json",
-
-  "typedoc:frontend:config:local": "node scripts/typedoc-source-config.mjs local typedoc-frontend.json",
-  "typedoc:frontend:config:github": "node scripts/typedoc-source-config.mjs github typedoc-frontend.json",
-
-  "typedoc:health": "node scripts/typedoc-tool-health.mjs",
-  "typedoc:doctor": "node scripts/typedoc-tool-health.mjs",
-
-  "typedoc:json:local": "npm run typedoc:config:local && node --max-old-space-size=8192 ./node_modules/typedoc/bin/typedoc --json typedoc-api.json --options typedoc.local.generated.json",
-  "typedoc:json:github": "npm run typedoc:config:github && node --max-old-space-size=8192 ./node_modules/typedoc/bin/typedoc --json typedoc-api.github.json --options typedoc.github.generated.json",
-
-  "typedoc:html:local": "npm run typedoc:config:local && node --max-old-space-size=8192 ./node_modules/typedoc/bin/typedoc --options typedoc.local.generated.json",
-  "typedoc:html:github": "npm run typedoc:config:github && node --max-old-space-size=8192 ./node_modules/typedoc/bin/typedoc --options typedoc.github.generated.json",
-
-  "typedoc:check-local": "node scripts/ai/typedoc-local-source-check.mjs",
-  "typedoc:strict": "node --max-old-space-size=8192 ./node_modules/typedoc/bin/typedoc --options typedoc-strict.json"
-}
-```
-
----
-
-## Quick start
-
-### 1. Check the toolchain
+## Main commands
 
 ```bash
 npm run typedoc:health
 npm run typedoc:doctor
+npm run typedoc:json:local
+npm run typedoc:check-local
+npm run typedoc:json:github
+npm run typedoc:html:github
+npm run typedoc:strict
 ```
 
-Expected:
+---
 
-```json
-{
-  "ok": true,
-  "toolchain": "typedoc-hybrid-source-links",
-  "errors": [],
-  "warnings": []
-}
-```
+## Local mode
 
-### 2. Generate local TypeDoc JSON
+Generate TypeDoc JSON with local VS Code links:
 
 ```bash
 npm run typedoc:json:local
 npm run typedoc:check-local
 ```
 
-Expected local source-link style:
+Expected link style:
 
 ```txt
 vscode://file/<absolute-local-repo-path>/{path}:{line}
 ```
 
-### 3. Generate GitHub-linked docs
+Use this for:
+
+```txt
+local development
+Codex worktrees
+Claude Code local work
+Cursor local work
+Cline/RooCode context
+AI docs inspection
+```
+
+---
+
+## GitHub mode
+
+Generate TypeDoc JSON or HTML with GitHub blob links:
 
 ```bash
 npm run typedoc:json:github
 npm run typedoc:html:github
 ```
 
-Expected GitHub source-link style:
+Expected link style:
 
 ```txt
 https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
 ```
 
-If GitHub repository detection fails, set explicit environment variables:
+If auto-detection fails:
 
 ```bash
 TYPEDOC_GITHUB_REPOSITORY=owner/repo TYPEDOC_GITHUB_REVISION=main npm run typedoc:json:github
@@ -241,42 +237,44 @@ npm run typedoc:json:github
 
 ---
 
-## Local vs GitHub mode
+## Health check
 
-| Mode | Intended environment | Source link output |
-|---|---|---|
-| `local` | Developer machine, local AI agent, Codex/Jules worktree | `vscode://file/.../{path}:{line}` |
-| `github` | CI, GitHub Pages, remote review, public docs | `https://github.com/owner/repo/blob/revision/{path}#L{line}` |
-| `auto` | Local by default, GitHub when CI/GitHub env is detected | Selects local or GitHub mode automatically |
+```bash
+npm run typedoc:health
+npm run typedoc:doctor
+```
+
+Expected output shape:
+
+```json
+{
+  "ok": true,
+  "toolchain": "typedoc-hybrid-source-links",
+  "generated": [
+    "typedoc.local.generated.json",
+    "typedoc.github.generated.json",
+    "typedoc-frontend.local.generated.json",
+    "typedoc-frontend.github.generated.json"
+  ],
+  "errors": [],
+  "warnings": []
+}
+```
 
 ---
 
-## Why this is evidence-backed
+## Validation benchmark
 
-TypeDoc officially supports:
-
-- converting TypeScript source comments into HTML documentation or a JSON model,
-- documenting app-like projects with `entryPointStrategy: "expand"`,
-- source link templates through `sourceLinkTemplate`,
-- `{path}`, `{line}`, and `{gitRevision}` placeholders,
-- `gitRevision` and `gitRemote` options for source linking.
-
-This toolkit wraps those TypeDoc capabilities into a repeatable local/GitHub workflow.
-
----
-
-## Validation and benchmark evidence
-
-The following workflow numbers were measured from local validation logs during development of this toolkit and its companion AI code-intelligence toolkit.
+The following numbers come from real local validation logs captured during development on a large TypeScript/React/Supabase repository.
 
 ### Before
 
 | Signal | Observed issue |
 |---|---|
-| Base TypeDoc docs generation | Failed when scanning too broadly with strict TypeScript checking. |
+| TypeDoc docs generation | Failed when scanning too broadly with strict TypeScript checking. |
 | Error output | 83 TypeScript errors and 114 warnings. |
-| Source-link strategy | Single placeholder-style GitHub link could not satisfy both local and public docs. |
-| TypeDoc status | No standalone `typedoc:health` confirmation. |
+| Source-link strategy | One placeholder GitHub link could not satisfy both local and public docs. |
+| TypeDoc health | No standalone `typedoc:health` confirmation. |
 | AI docs usage | Local agents had no guaranteed local-file source links. |
 
 ### After
@@ -291,48 +289,6 @@ The following workflow numbers were measured from local validation logs during d
 | Frontend GitHub generated config | `typedoc-frontend.github.generated.json` |
 | Toolchain errors | `[]` |
 | Toolchain warnings | `[]` |
-
-### Important caveat
-
-`typedoc:health` validates the hybrid TypeDoc toolchain and generated configs. It is intentionally lighter than a full TypeDoc build. To prove documentation generation end-to-end in your repo, also run:
-
-```bash
-npm run typedoc:json:local
-npm run typedoc:check-local
-```
-
-Use strict validation only when you intentionally want docs to fail on real TypeScript issues:
-
-```bash
-npm run typedoc:strict
-```
-
----
-
-## AI-agent use case
-
-When an AI coding agent receives a TypeDoc-related task, use:
-
-```bash
-npm run typedoc:health
-npm run typedoc:config:local
-npm run typedoc:config:github
-npm run typedoc:check-local
-```
-
-For a local repo, links should open directly in VS Code:
-
-```txt
-vscode://file/D:/repo/src/example.ts:42
-```
-
-For public docs, links should open in GitHub:
-
-```txt
-https://github.com/owner/repo/blob/main/src/example.ts#L42
-```
-
-This reduces context confusion when the same documentation is consumed locally by an agent and publicly by a browser user.
 
 ---
 
@@ -368,6 +324,7 @@ npm run typedoc:doctor
 
 Rules:
 - Do not use placeholder GitHub links such as `your-username/your-repo`.
+- Do not hardcode GitHub `blob/main` image links in README files when relative paths will work.
 - Do not commit generated local configs unless the repo policy explicitly allows it.
 - Use `typedoc:strict` only when intentionally validating docs against TypeScript errors.
 - Local AI-context docs should use local source links.
@@ -376,119 +333,59 @@ Rules:
 
 ---
 
-## README injection section
+## Suggested GitHub About metadata
 
-Add this to your project README if useful:
+Use this description:
 
-```md
-## TypeDoc Hybrid Source Links
-
-This repo uses `typedoc-hybrid-source-links` to generate source links appropriate for local and public documentation.
-
-Common commands:
-
-```bash
-npm run typedoc:health
-npm run typedoc:json:local
-npm run typedoc:check-local
-npm run typedoc:json:github
-npm run typedoc:html:github
+```txt
+Hybrid TypeDoc source-link generator for local VS Code links, GitHub blob links, AI-agent docs context, and TypeDoc health checks.
 ```
 
-Local docs open source files in VS Code. Public docs open source files in GitHub.
-```
+Suggested GitHub topics:
 
----
-
-## Recommended configs
-
-### Base `typedoc.json`
-
-```json
-{
-  "$schema": "https://typedoc.org/schema.json",
-  "tsconfig": "./tsconfig.doc.json",
-  "entryPoints": ["src/index.ts"],
-  "entryPointStrategy": "expand",
-  "skipErrorChecking": true,
-  "validation": {
-    "notExported": false,
-    "invalidLink": false
-  },
-  "exclude": [
-    "**/__tests__/**",
-    "**/__mocks__/**",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/node_modules/**"
-  ],
-  "out": "docs/api",
-  "name": "API Documentation",
-  "disableSources": false
-}
-```
-
-### Strict config
-
-Use `typedoc-strict.json` for intentional strict docs validation:
-
-```json
-{
-  "$schema": "https://typedoc.org/schema.json",
-  "tsconfig": "./tsconfig.doc.json",
-  "entryPoints": ["src/index.ts"],
-  "entryPointStrategy": "expand",
-  "skipErrorChecking": false,
-  "out": "docs/api-strict",
-  "name": "Strict API Documentation"
-}
+```txt
+typedoc
+typedoc-plugin
+sourceLinkTemplate
+typescript
+documentation
+api-docs
+github-pages
+vscode
+ai-coding-agent
+codex
+claude-code
+cursor
+cline
+developer-tools
 ```
 
 ---
 
-## Development
+## Why this is evidence-backed
 
-Run smoke validation:
+TypeDoc officially supports:
 
-```bash
-npm run smoke
-```
+- documenting TypeScript entry points,
+- `entryPointStrategy: "expand"` for recursively expanding directories into entry points,
+- HTML and JSON output,
+- `sourceLinkTemplate`,
+- `{path}`, `{line}`, and `{gitRevision}` placeholders,
+- `gitRevision` and `gitRemote` source-link behavior.
 
-Run syntax checks manually:
-
-```bash
-node --check scripts/typedoc-source-config.mjs
-node --check scripts/typedoc-source-link-doctor.mjs
-node --check scripts/typedoc-tool-health.mjs
-node --check scripts/ai/typedoc-local-source-check.mjs
-```
+This toolkit wraps those official TypeDoc features into a repeatable local/GitHub workflow.
 
 ---
 
-## Roadmap
+## Sources
 
-Possible future enhancements:
-
-- package presets for library vs app repos,
-- built-in GitHub Actions workflow,
-- generated badge/report for docs health,
-- source-link audit output as Markdown,
-- TypeDoc config migration assistant,
-- strict/local/CI policy matrix.
-
----
-
-## Sources and references
-
-Public references used for this README:
-
-- TypeDoc official docs — TypeDoc converts comments in TypeScript source into HTML documentation or a JSON model.
-- TypeDoc official docs — `entryPointStrategy: "expand"` can document app-style projects file-by-file.
-- TypeDoc official docs — `sourceLinkTemplate` supports `{path}`, `{line}`, and `{gitRevision}` placeholders.
-- TypeDoc official docs — `gitRevision` and `gitRemote` affect source linking behavior.
-- Local validation logs from toolkit development — `typedoc:health`, `typedoc:doctor`, generated config creation, and local source-link checks.
+- [TypeDoc Input Options](https://typedoc.org/documents/Options.Input.html)
+- [TypeDoc Output Options](https://typedoc.org/documents/Options.Output.html)
+- [TypeDoc Overview](https://typedoc.org/documents/Overview.html)
+- [OpenAI — Introducing Codex](https://openai.com/index/introducing-codex/)
+- [Anthropic — Claude SWE-bench Performance](https://www.anthropic.com/engineering/swe-bench-sonnet/)
+- [Cursor Pricing](https://cursor.com/pricing)
+- [Kimi API Platform — Kimi K2.5 in programming tools](https://platform.moonshot.ai/docs/guide/agent-support.en-US)
 
 ---
 
