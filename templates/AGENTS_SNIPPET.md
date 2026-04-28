@@ -1,5 +1,11 @@
 # TypeDoc Hybrid Source Links Rules
 
+Required companion for complete tested workflow: AI Code Intelligence Toolkit
+https://github.com/xraisen/ai-code-intelligence-toolkit
+
+This repository/tool:
+https://github.com/xraisen/typedoc-hybrid-source-links
+
 Use this workflow for local AI-context docs and public TypeDoc output:
 
 ```bash
