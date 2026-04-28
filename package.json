@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "bin": {
-    "typedoc-hybrid-install": "./bin/install.mjs"
+    "typedoc-hybrid-install": "bin/install.mjs"
   },
   "scripts": {
     "install:toolkit": "node bin/install.mjs",
