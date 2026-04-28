@@ -1,6 +1,6 @@
 {
   "name": "typedoc-hybrid-source-links",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Hybrid TypeDoc source-link toolkit for local VS Code links, GitHub source links, TypeDoc health checks, and AI-agent documentation workflows. Tested with Codex CLI and Codex Windows app workflow.",
   "type": "module",
   "license": "MIT",
@@ -29,6 +29,8 @@
     "TRADEMARKS.md",
     "VALIDATION_REPORT.md",
     "benchmark.json",
+    "index.js",
+    "PATCH_NOTES_v1.0.3.md",
     "bin",
     "docs",
     "templates"

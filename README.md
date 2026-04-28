@@ -16,36 +16,6 @@ It is **not** a token-saving product. Any token or cost reduction is only a side
 
 ---
 
-## Important companion prerequisite
-
-For the complete tested workflow, install **both** tools:
-
-- **TypeDoc Hybrid Source Links**: [https://github.com/xraisen/typedoc-hybrid-source-links](https://github.com/xraisen/typedoc-hybrid-source-links)
-- **AI Code Intelligence Toolkit**: [https://github.com/xraisen/ai-code-intelligence-toolkit](https://github.com/xraisen/ai-code-intelligence-toolkit)
-
-**TypeDoc Hybrid Source Links can run by itself** for TypeDoc local/GitHub source-link generation.
-
-**AI Code Intelligence Toolkit can run by itself** for GraphRAG, `ai:spec`, `ai:preflight`, graph doctor, and leak checks.
-
-**They are designed to work best together.** The benchmark, health checks, and guarded Codex-compatible workflow described below are based on using **TypeDoc Hybrid Source Links + AI Code Intelligence Toolkit together**.
-
-Install both:
-
-```bash
-npm install --save-dev typedoc-hybrid-source-links ai-code-intelligence-toolkit typedoc
-npx typedoc-hybrid-install --target . --overwrite
-npx ai-code-intel-install --target . --overwrite
-```
-
-Do not skip the companion tool if you want the full workflow:
-
-```txt
-TypeDoc Hybrid Source Links = local/GitHub source links, TypeDoc health, AI-readable docs context
-AI Code Intelligence Toolkit = graph, preflight, drift control, allowed patch scope
-```
-
----
-
 ## What this toolkit does
 
 ```txt
@@ -120,21 +90,6 @@ npm run typedoc:html:github
 ```
 
 ---
-
-
-## Precision first, savings second
-
-This project is **not made primarily to save tokens or money**.
-
-The main purpose is precision:
-
-- resolve the right files before editing,
-- reduce wrong-file drift,
-- prevent generated files from becoming source truth,
-- give Codex-compatible agents an executable workflow,
-- keep TypeDoc links pointed to the correct local or GitHub source.
-
-Lower token and cost exposure can happen as a **side effect** because the agent reads and patches fewer irrelevant files. It is not advertised as a guaranteed billing reduction.
 
 ## Benchmark: unstructured AI coding vs guarded Codex-compatible workflow
 
@@ -335,13 +290,6 @@ See [TRADEMARKS.md](TRADEMARKS.md). This project is independently maintained and
 No vendor logos are shipped.
 
 ---
-
-
-## Companion link
-
-This tool is intended to be paired with **AI Code Intelligence Toolkit**:
-
-[https://github.com/xraisen/ai-code-intelligence-toolkit](https://github.com/xraisen/ai-code-intelligence-toolkit)
 
 ## License
 
