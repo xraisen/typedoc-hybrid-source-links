@@ -33,22 +33,6 @@ Local mode:  vscode://file/<absolute-local-repo-path>/{path}:{line}
 GitHub mode: https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
 ```
 
-<<<<<<< HEAD
-
-### Complete AI anti-drift loop
-
-When AI Code Intelligence Toolkit is installed too:
-
-```bash
-npm run typedoc:json:local && npm run ai:graph:build
-npm run ai:spec -- "<task>"
-npm run ai:graph:query -- "<specific symbol/file/error/feature>"
-npm run ai:preflight -- "<task>"
-```
-
-Use targeted PowerShell `Select-String` for bounded context instead of broad first-pass `Get-Content` or `rg` searches.
-=======
 ### Tested positioning
 
 Tested with Codex CLI and Codex Windows app workflow. Other assistants may run the same npm scripts, but this release is not claiming all assistants are tested.
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
