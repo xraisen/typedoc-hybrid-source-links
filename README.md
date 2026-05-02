@@ -1,33 +1,33 @@
 # TypeDoc Hybrid Source Links
 
-**Local VS Code source links for AI context, GitHub source links for public documentation.**
+**Local source links for AI work. GitHub source links for public docs.**
 
-TypeDoc Hybrid Source Links solves a practical documentation problem: AI coding agents need local source links they can follow on the developer machine, while public documentation should use GitHub blob links. This package generates TypeDoc configs for both modes and validates that local mode does not leak GitHub links.
+TypeDoc Hybrid Source Links solves a practical documentation problem in modern TypeScript projects:
+
+- local AI and developer workflows need **machine-local source links** such as `vscode://file/...`,
+- public documentation needs **shareable GitHub blob links**,
+- and TypeDoc often needs help on Vite / React / TypeScript repos where tsconfig references and entrypoint handling can break documentation generation.
+
+This package installs a hybrid TypeDoc workflow with health checks, local-link validation, GitHub-link generation, and the v1.0.9 entrypoint fix that preserves explicit entrypoint globs.
 
 ![Precision workflow diagram](docs/assets/precision-workflow-diagram.png)
 
-## Why this exists
+---
 
-TypeDoc source links are useful only when they point to the right place for the current job:
+## Why teams install this
 
-- Local AI/code-review workflows need `vscode://file/...` links.
-- Public docs need `https://github.com/<owner>/<repo>/blob/<revision>/...` links.
-- Vite/React/TypeScript projects often use tsconfig references that confuse TypeDoc entrypoint detection.
-- Generated docs can silently become stale or point to the wrong source mode.
+In real projects, TypeDoc can fail in subtle ways:
 
-This tool installs a hybrid TypeDoc setup with health checks, local source-link checks, and fixed v1.0.9 entrypoint handling for real Vite/React/TypeScript projects.
+- local docs accidentally point to GitHub URLs,
+- public docs accidentally point to `vscode://file` paths,
+- generated JSON is stale or missing,
+- entry points are rewritten into broken bare folders,
+- Vite/React/TS repos with tsconfig references fail to resolve entry points,
+- and local documentation becomes unusable as AI context.
 
-## Companion package
+This package fixes those problems by separating **local mode** from **GitHub mode** and validating the result.
 
-For the complete tested workflow, install it with **AI Code Intelligence Toolkit**:
-
-```powershell
-npm install -D typedoc typedoc-hybrid-source-links@latest ai-code-intelligence-toolkit@latest
-npx typedoc-hybrid-install --target . --overwrite
-npx ai-code-intel-install --target . --overwrite --strict
-npm run ai:history:init
-npm run ai:inject-contract
-```
+---
 
 ## Before vs after
 
@@ -35,18 +35,20 @@ npm run ai:inject-contract
 
 | Without this package | With this package |
 |---|---|
-| Local docs may point to GitHub blob URLs. | Local mode uses `vscode://file/<absolute-local-path>/{path}:{line}`. |
-| Public docs may point to local machine paths. | GitHub mode uses public GitHub blob URLs. |
-| TypeDoc fails on Vite/TS projects with referenced tsconfigs. | v1.0.9 preserves glob entry points and uses `entryPointStrategy: "expand"`. |
-| Entry points are rewritten into broken bare folders. | Explicit globs are preserved: `src/**/*.ts`, `src/**/*.tsx`, `api/**/*.ts`, `api/**/*.tsx`, `scripts/**/*.mjs`. |
-| AI agents work from stale or missing TypeDoc JSON. | `typedoc:json:local` becomes part of the anti-drift loop. |
-| Source-link mistakes are discovered late. | `typedoc:health` and `typedoc:check-local` catch them early. |
+| Local docs may leak GitHub blob links. | Local mode validates local source links and checks for GitHub blob leakage. |
+| Public docs may accidentally point to local machine paths. | GitHub mode emits public GitHub blob links suitable for shared docs. |
+| TypeDoc entry points may break on referenced tsconfigs. | v1.0.9 preserves explicit globs and uses `entryPointStrategy: "expand"`. |
+| Config generation can silently rewrite correct globs into broken folders. | Explicit config entry points stay intact. |
+| Documentation issues are discovered late. | `typedoc:health`, `typedoc:json:local`, and `typedoc:check-local` catch them early. |
+| AI agents may work from stale or missing docs. | Fresh local JSON becomes part of the anti-drift workflow. |
 
-## Validated benchmark snapshot
+---
 
-Latest real-project validation after the v1.0.9 entrypoint fix:
+## Evidence-backed validation snapshot
 
-| Metric | Result |
+Latest live validation on `mtll-meta-control-vercel` after the v1.0.9 entrypoint fix produced:
+
+| Metric | Observed result |
 |---|---:|
 | TypeDoc local source URLs | `1,527` |
 | GitHub blob links in local mode | `0` |
@@ -56,7 +58,28 @@ Latest real-project validation after the v1.0.9 entrypoint fix:
 | Graph nodes when paired with AI toolkit | `2,541` |
 | Graph leak count when paired with AI toolkit | `0` |
 
-Documentation warnings about internal referenced types are not automatically blockers. A blocker is an entrypoint failure, missing `typedoc-api.json`, local mode using GitHub blob links, or public docs using local `vscode://file` links.
+The key evidence is that the generated config preserved the intended explicit globs and no longer fell back to broken directory-only entry points.
+
+---
+
+## Companion package
+
+For the complete tested workflow, install this with **AI Code Intelligence Toolkit**.
+
+```powershell
+npm install -D typedoc typedoc-hybrid-source-links@latest ai-code-intelligence-toolkit@latest
+npx typedoc-hybrid-install --target . --overwrite
+npx ai-code-intel-install --target . --overwrite --strict
+npm run ai:history:init
+npm run ai:inject-contract
+```
+
+### Package roles
+
+- **`typedoc-hybrid-source-links`** handles TypeDoc config generation, local/GitHub source link modes, and TypeDoc health checks.
+- **`ai-code-intelligence-toolkit`** adds the anti-drift workflow, code graph, durable changelog memory, and smart validation memory.
+
+---
 
 ## What gets installed
 
@@ -74,7 +97,48 @@ tsconfig.doc.json
 types/typedoc-local-shims.d.ts
 ```
 
-It also appends managed documentation sections to `AGENTS.md` and `README.md`.
+It also appends a managed documentation block to `AGENTS.md` and `README.md`.
+
+---
+
+## Source-link modes
+
+### Local mode
+
+Local mode is designed for AI agents and local developer navigation.
+
+Typical source-link shape:
+
+```text
+vscode://file/<absolute-local-repo-path>/{path}:{line}
+```
+
+Use local mode for:
+
+- AI code navigation,
+- code review on your machine,
+- local TypeDoc JSON as AI context,
+- Windows developer workflows,
+- and repository-internal documentation.
+
+### GitHub mode
+
+GitHub mode is designed for public or shared documentation.
+
+Typical source-link shape:
+
+```text
+https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
+```
+
+Use GitHub mode for:
+
+- public docs,
+- GitHub Pages,
+- client-facing documentation,
+- and any docs that need to be opened outside your local machine.
+
+---
 
 ## Commands
 
@@ -91,39 +155,13 @@ It also appends managed documentation sections to `AGENTS.md` and `README.md`.
 | Strict runner | `npm run typedoc:strict` |
 | Final TypeDoc health | `npm run typedoc:final-health` |
 
-## Source-link behavior
-
-### Local mode
-
-```text
-vscode://file/<absolute-local-repo-path>/{path}:{line}
-```
-
-Use for:
-
-- Codex CLI
-- local AI agent navigation
-- Windows developer workflows
-- TypeDoc JSON used as code context
-
-### GitHub mode
-
-```text
-https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
-```
-
-Use for:
-
-- public documentation
-- GitHub Pages
-- shared docs outside your local machine
-- client-facing API references
+---
 
 ## v1.0.9 entrypoint fix
 
-The v1.0.9 config generator preserves explicit glob entry points and keeps `entryPointStrategy: "expand"`.
+The most important v1.0.9 change is the entrypoint preservation fix.
 
-Expected generated shape:
+### Correct generated shape
 
 ```json
 {
@@ -139,7 +177,7 @@ Expected generated shape:
 }
 ```
 
-This prevents the old failure mode where config generation rewrote entry points into bare folders like:
+### Old broken shape
 
 ```json
 {
@@ -147,34 +185,43 @@ This prevents the old failure mode where config generation rewrote entry points 
 }
 ```
 
-which caused TypeDoc to fail with:
+The old broken shape caused TypeDoc to fail with:
 
 ```text
 Unable to find any entry points.
 ```
 
-## Recommended workflow with AI Code Intelligence Toolkit
+The v1.0.9 fix ensures explicit globs are preserved instead of being downgraded into folder fallbacks.
 
-Before AI coding work:
+---
+
+## Quick start
+
+### 1. Install
 
 ```powershell
-npm run ai:history:status
-npm run typedoc:json:local && npm run ai:graph:build
-npm run ai:spec -- "<task>"
-npm run ai:preflight -- "<task>"
-npm run ai:graph:query -- "<specific symbol/file/error/feature>"
+npm install -D typedoc typedoc-hybrid-source-links@latest
+npx typedoc-hybrid-install --target . --overwrite
 ```
 
-For TypeDoc-specific work:
+### 2. Generate local AI-friendly JSON
 
 ```powershell
-npm run typedoc:health
 npm run typedoc:json:local
 npm run typedoc:check-local
+```
+
+### 3. Generate public GitHub docs
+
+```powershell
 npm run typedoc:html:github
 ```
 
-## Example: verify local mode
+---
+
+## Example workflows
+
+### Example 1 — verify local mode
 
 ```powershell
 Remove-Item -Force typedoc-api.json, typedoc.local.generated.json -ErrorAction SilentlyContinue
@@ -191,13 +238,37 @@ githubBlobSourceUrlCount = 0
 placeholderSourceUrlCount = 0
 ```
 
-## Example: generate public docs
+### Example 2 — generate public docs
 
 ```powershell
 npm run typedoc:html:github
 ```
 
-Use GitHub mode for public docs because `vscode://file` links are local-machine specific and should not be published as public source links.
+### Example 3 — final TypeDoc health gate
+
+```powershell
+npm run typedoc:health
+npm run typedoc:json:local
+npm run typedoc:check-local
+```
+
+---
+
+## Recommended workflow with AI Code Intelligence Toolkit
+
+Before AI coding work:
+
+```powershell
+npm run ai:history:status
+npm run typedoc:json:local && npm run ai:graph:build
+npm run ai:spec -- "<task>"
+npm run ai:preflight -- "<task>"
+npm run ai:graph:query -- "<specific symbol/file/error/feature>"
+```
+
+This ensures the TypeDoc JSON is fresh before the agent starts navigating code.
+
+---
 
 ## PowerShell context rule for agents
 
@@ -208,24 +279,30 @@ Select-String -Path "AI_GROUND_TRUTH.md","AI_SYMBOL_INDEX.json" -Pattern "typedo
 Select-String -Path "scripts/typedoc-source-config.mjs" -Pattern "entryPointStrategy" -SimpleMatch -Context 40,60
 ```
 
-Avoid broad `Get-Content` dumps and broad `rg` as first-pass navigation.
+Avoid broad `Get-Content` dumps and broad `rg` as the first navigation move.
+
+---
 
 ## Expected warnings vs blockers
 
-Warnings that may be acceptable:
+### Usually acceptable warnings
 
-- A glob like `api/**/*.tsx` does not match files because the project has no TSX API files.
-- TypeDoc reports internal referenced types not included in documentation.
+- `api/**/*.tsx` does not match files because the project has no TSX API files.
+- TypeDoc warns that some referenced internal types are not included in the docs.
 
-Blockers:
+### Real blockers
 
-- `Unable to find any entry points`.
-- `typedoc-api.json` is missing after `typedoc:json:local`.
-- Local mode has `githubBlobSourceUrlCount > 0`.
-- GitHub/public docs use local `vscode://file` links.
+- `Unable to find any entry points.`
+- `typedoc-api.json` is missing after `npm run typedoc:json:local`.
+- Local mode reports `githubBlobSourceUrlCount > 0`.
+- Public docs use local `vscode://file` links.
 - Generated config loses `entryPointStrategy: "expand"`.
 
+---
+
 ## Final health
+
+Use this before shipping docs changes:
 
 ```powershell
 npm run typedoc:health
@@ -233,11 +310,19 @@ npm run typedoc:json:local
 npm run typedoc:check-local
 ```
 
-When used with AI Code Intelligence Toolkit:
+When paired with AI Code Intelligence Toolkit, you can also use:
 
 ```powershell
 npm run ai:final-health
 ```
+
+---
+
+## Benchmarked outcome in plain English
+
+With this package, local documentation becomes useful as AI context and public documentation stays safe for sharing. The practical benefit is not theoretical: the validated run showed fresh local JSON, zero GitHub blob leaks in local mode, and preserved explicit entrypoint globs in a real project.
+
+---
 
 ## License
 
