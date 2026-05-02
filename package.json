@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "bin": {
-    "typedoc-hybrid-install": "./bin/install.mjs"
+    "typedoc-hybrid-install": "bin/install.mjs"
   },
   "files": [
     "bin",
