@@ -6,29 +6,15 @@
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
-<<<<<<< HEAD
     "noEmit": true,
-=======
-    "resolveJsonModule": true,
-    "strict": false,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
     "types": []
   },
   "include": [
     "src/**/*",
     "scripts/**/*",
-    "bin/**/*",
     "mcp/**/*",
-<<<<<<< HEAD
     "bin/**/*",
     "types/**/*"
-=======
-    "templates/**/*",
-    "types/typedoc-local-shims.d.ts",
-    "vite-env.d.ts"
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
   ],
   "exclude": [
     "node_modules",
@@ -37,17 +23,7 @@
     "out",
     "output",
     "coverage",
-<<<<<<< HEAD
     "docs/api*",
     "public/docs"
-=======
-    "docs/api",
-    "docs/api-local",
-    "docs/api-github",
-    "public/docs",
-    ".ai/code-graph",
-    "**/*.test.*",
-    "**/*.spec.*"
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
   ]
 }

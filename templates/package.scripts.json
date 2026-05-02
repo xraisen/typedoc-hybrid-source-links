@@ -15,11 +15,11 @@
   "typedoc:health": "node scripts/typedoc-tool-health.mjs",
   "typedoc:doctor": "node scripts/typedoc-tool-health.mjs",
   "typedoc:check-local": "node scripts/ai/typedoc-local-source-check.mjs",
-<<<<<<< HEAD
-  "typedoc:strict": "TYPEDOC_STRICT=true npx --no-install typedoc --options typedoc-strict.json",
-=======
-  "typedoc:strict": "npx --no-install typedoc --options typedoc-strict.json",
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
+  "typedoc:strict": "node scripts/typedoc-strict-runner.mjs",
   "docs:typedoc": "npm run typedoc:html:auto",
-  "typedoc:final-health": "npm run typedoc:health && npm run typedoc:json:local && npm run typedoc:check-local"
+  "typedoc:final-health": "npm run typedoc:health && npm run typedoc:json:local && npm run typedoc:check-local",
+  "typedoc:links:local": "npm run typedoc:json:local",
+  "typedoc:links:github": "npm run typedoc:html:github",
+  "typedoc:links:doctor": "npm run typedoc:health && npm run typedoc:check-local",
+  "typedoc:health:final": "npm run typedoc:final-health"
 }

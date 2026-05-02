@@ -1,12 +1,7 @@
 {
   "name": "typedoc-hybrid-source-links",
-<<<<<<< HEAD
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Hybrid TypeDoc source links for local VS Code navigation and public GitHub docs.",
-=======
-  "version": "1.0.5",
-  "description": "Hybrid TypeDoc source-link toolkit for local VS Code links, GitHub source links, TypeDoc health checks, and AI-agent documentation workflows. Tested with Codex CLI and Codex Windows app workflow.",
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
   "type": "module",
   "main": "index.js",
   "bin": {
@@ -22,7 +17,11 @@
     "index.js",
     "benchmark.json",
     "PATCH_NOTES_v1.0.6.md",
-    "VALIDATION_REPORT.md"
+    "VALIDATION_REPORT.md",
+    "PATCH_NOTES_v1.0.7.md",
+    "PATCH_NOTES_v1.0.8.md",
+    "PATCH_NOTES_v1.0.8_FINAL_DRIFT_HARDENED.md",
+    "PATCH_ROLLUP_v1.0.8_CUMULATIVE.md"
   ],
   "scripts": {
     "node-check": "node scripts/package-node-check.mjs",
@@ -30,33 +29,20 @@
     "pack:dry": "npm pack --dry-run"
   },
   "keywords": [
-    "typedoc",
-    "source-links",
-    "vscode",
+    "ai-agent",
+    "ai-changelog",
+    "documentation",
+    "drift-control",
     "github",
-    "documentation"
+    "local-source-links",
+    "smart-validation",
+    "source-links",
+    "token-conservation",
+    "typedoc",
+    "typedoc-json",
+    "vscode"
   ],
-<<<<<<< HEAD
   "license": "MIT",
-=======
-  "files": [
-    "LICENSE",
-    "README.md",
-    "TRADEMARKS.md",
-    "VALIDATION_REPORT.md",
-    "benchmark.json",
-    "index.js",
-    "PATCH_NOTES_v1.0.5.md",
-    "PATCH_NOTES_v1.0.3.md",
-    "PATCH_NOTES_v1.0.4.md",
-    "bin",
-    "docs",
-    "templates"
-  ],
-  "engines": {
-    "node": ">=20"
-  },
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xraisen/typedoc-hybrid-source-links.git"

@@ -4,12 +4,10 @@ Hybrid TypeDoc source links for local VS Code navigation, AI-readable TypeDoc JS
 
 ### Required companion link
 
-For the complete tested workflow, install this with **AI Code Intelligence Toolkit**:
+For the complete tested workflow, install this with AI Code Intelligence Toolkit:
 
-```txt
-TypeDoc Hybrid Source Links: https://github.com/xraisen/typedoc-hybrid-source-links
-AI Code Intelligence Toolkit: https://github.com/xraisen/ai-code-intelligence-toolkit
-```
+- TypeDoc Hybrid Source Links: https://github.com/xraisen/typedoc-hybrid-source-links
+- AI Code Intelligence Toolkit: https://github.com/xraisen/ai-code-intelligence-toolkit
 
 ```bash
 npm install --save-dev typedoc-hybrid-source-links ai-code-intelligence-toolkit typedoc
@@ -26,18 +24,7 @@ npm run typedoc:check-local
 npm run typedoc:html:github
 ```
 
-### Link behavior
-
-```txt
-Local mode:  vscode://file/<absolute-local-repo-path>/{path}:{line}
-GitHub mode: https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
-```
-
-<<<<<<< HEAD
-
-### Complete AI anti-drift loop
-
-When AI Code Intelligence Toolkit is installed too:
+### Companion anti-drift loop
 
 ```bash
 npm run typedoc:json:local && npm run ai:graph:build
@@ -46,9 +33,4 @@ npm run ai:graph:query -- "<specific symbol/file/error/feature>"
 npm run ai:preflight -- "<task>"
 ```
 
-Use targeted PowerShell `Select-String` for bounded context instead of broad first-pass `Get-Content` or `rg` searches.
-=======
-### Tested positioning
-
-Tested with Codex CLI and Codex Windows app workflow. Other assistants may run the same npm scripts, but this release is not claiming all assistants are tested.
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
+Use `Select-String` for bounded PowerShell reads instead of broad `Get-Content` dumps or `rg` as the first navigation move.

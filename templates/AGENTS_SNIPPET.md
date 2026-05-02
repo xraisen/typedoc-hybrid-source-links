@@ -6,11 +6,7 @@ https://github.com/xraisen/ai-code-intelligence-toolkit
 This repository/tool:
 https://github.com/xraisen/typedoc-hybrid-source-links
 
-<<<<<<< HEAD
 Use local TypeDoc mode for AI-agent worktrees:
-=======
-Use this workflow for local AI-context docs and public TypeDoc output:
->>>>>>> 72196d993232b46d868785549bda56f5473ab2e8
 
 ```bash
 npm run typedoc:health
@@ -27,10 +23,9 @@ npm run typedoc:html:github
 
 Do not use placeholder GitHub links such as `OWNER/REPO`, `your-username`, or `your-repo`.
 
+## Companion anti-drift loop
 
-## Complete workflow anti-drift loop
-
-When AI Code Intelligence Toolkit is installed, run this before AI source edits:
+When AI Code Intelligence Toolkit is installed, the AI coding agent must run this before source edits:
 
 ```bash
 npm run typedoc:json:local && npm run ai:graph:build
