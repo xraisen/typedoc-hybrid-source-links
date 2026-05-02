@@ -1,151 +1,150 @@
-# TypeDoc Hybrid Source Links Agent Contract
+# Agent Contract Template
 
-This repository uses **TypeDoc Hybrid Source Links** for local AI-readable TypeDoc JSON and public GitHub-linked documentation.
+This template is intended to be injected into `AGENTS.md` by the installer. It is a coding-agent operating contract, not a human-only note.
 
----
+## Non-negotiable anti-drift workflow
 
-## Required install
+Before editing source code, config, tests, docs, scripts, or generated-tooling behavior, always run and wait for:
 
-```bash
-npm install --save-dev typedoc-hybrid-source-links typedoc
-npx typedoc-hybrid-install --target . --overwrite
+```powershell
+npm run ai:history:status
+npm run typedoc:json:local && npm run ai:graph:build
+npm run ai:spec -- "<task>"
+npm run ai:preflight -- "<task>"
+npm run ai:graph:query -- "<specific symbol/file/error/feature>"
 ```
 
-Recommended full AI workflow install:
+The agent must understand the task goal, prior history, relevant files, and likely symbols before touching implementation files.
 
-```bash
-npm install --save-dev typedoc-hybrid-source-links ai-code-intelligence-toolkit typedoc
-npx typedoc-hybrid-install --target . --overwrite
-npx ai-code-intel-install --target . --overwrite --strict
+## Edit permission
+
+After the anti-drift workflow completes, the AI coding agent may edit every repository file required to complete the requested task correctly.
+
+`ai:spec`, `ai:preflight`, and `ai:graph:query` are discovery and safety tools. They are not a hard patch whitelist. Do not refuse necessary edits only because a file is absent from `suggestedEditFiles`.
+
+Avoid hand-editing generated files, build outputs, dependency folders, archives, and TypeDoc JSON unless the task is specifically about generated documentation, generated artifacts, or toolkit behavior.
+
+## Source-of-truth order
+
+1. `AGENTS.md`
+2. `docs/ai-changelog/START_HERE.md`
+3. `docs/ai-changelog/history.index.json`
+4. `AI_GROUND_TRUTH.md`
+5. `AI_SYMBOL_INDEX.json`
+6. `.ai/code-graph/graph.json`, only after the current-cycle graph build
+7. Targeted source windows only
+
+## PowerShell context contract
+
+Use bounded `Select-String` reads first:
+
+```powershell
+Select-String -Path "AI_GROUND_TRUTH.md","AI_SYMBOL_INDEX.json","docs/ai-changelog/START_HERE.md" -Pattern "<symbol or file>" -SimpleMatch -Context 4,8
+Select-String -Path "<exact-file-from-graph-query>" -Pattern "<specific-symbol-or-phrase>" -SimpleMatch -Context 40,60
 ```
 
----
+Do not use broad `Get-Content` file dumps or broad `rg` as the first repo navigation step. Use wider search only after graph/symbol lookup fails or the task explicitly requires repository-wide investigation.
 
-## Link modes
+## Token conservation rules
 
-### Local mode
+- Read durable history and maps before source files.
+- Prefer exact symbol/file lookups over broad reading.
+- Prefer graph query candidates before opening implementation files.
+- Use `ai:test:status` before repeating expensive validation.
+- Use `ai:test:smart` for build, lint, and tests.
+- Do not repeat a successful unchanged validation unless `--force` is intentional.
 
-Use local mode for AI coding agents and local developer navigation:
+## Required history memory
 
-```bash
-npm run typedoc:json:local
-npm run typedoc:check-local
+Record important fixes, bugs, behavior changes, and tool changes:
+
+```powershell
+npm run ai:history:add -- --task "<task>" --summary "<what changed>" --files "file1,file2" --validation "npm run build"
 ```
 
-Expected source links:
+The repository should keep numbered Markdown entries under:
 
-```txt
-vscode://file/<absolute-local-repo-path>/{path}:{line}
+```text
+docs/ai-changelog/
 ```
 
-### GitHub mode
+`START_HERE.md` and `history.index.json` are the lookup directory for future agents.
 
-Use GitHub mode for public HTML docs:
+## After modifications
 
-```bash
-npm run typedoc:html:github
+Run suitable validation through smart validation:
+
+```powershell
+npm run ai:test:smart -- "npm run build"
+npm run ai:test:smart -- "npm run test"
+npm run ai:test:smart -- "npm run lint"
 ```
 
-Expected source links:
+Then record the work:
 
-```txt
-https://github.com/<owner>/<repo>/blob/<revision>/{path}#L{line}
+```powershell
+npm run ai:history:add -- --task "<task>" --summary "<what changed>" --validation "<validation command>"
 ```
 
----
+Before the next edit cycle, refresh context again:
 
-## TypeDoc entrypoint contract
-
-TypeDoc config must preserve glob entry points and use expand mode:
-
-```json
-{
-  "entryPoints": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "api/**/*.ts",
-    "api/**/*.tsx",
-    "scripts/**/*.mjs"
-  ],
-  "entryPointStrategy": "expand",
-  "tsconfig": "tsconfig.doc.json"
-}
+```powershell
+npm run typedoc:json:local && npm run ai:graph:build
 ```
 
-Do not rewrite glob entry points into bare folders such as:
+## Use-case scenarios
 
-```json
-{
-  "entryPoints": ["src", "scripts", "mcp"]
-}
+### UI/layout issue
+
+```powershell
+npm run ai:history:status
+npm run typedoc:json:local && npm run ai:graph:build
+npm run ai:spec -- "Fix dashboard spacing, list overflow, panel layout, and text clipping"
+npm run ai:preflight -- "Fix dashboard spacing, list overflow, panel layout, and text clipping"
+npm run ai:graph:query -- "dashboard layout side panel list view App"
 ```
 
-That can cause TypeDoc to fail in Vite/React/TypeScript projects with:
+### Backend/API issue
 
-```txt
-The entry point ./src is not referenced by the 'files' or 'include' option in your tsconfig
-Unable to find any entry points
+```powershell
+npm run ai:history:status
+npm run typedoc:json:local && npm run ai:graph:build
+npm run ai:spec -- "Fix readiness endpoint, webhook validation, and server-side permission checks"
+npm run ai:preflight -- "Fix readiness endpoint, webhook validation, and server-side permission checks"
+npm run ai:graph:query -- "readiness webhook permissions api"
 ```
 
----
+### TypeDoc/source-link issue
 
-## Required validation
+```powershell
+npm run typedoc:json:local && npm run ai:graph:build
+npm run ai:spec -- "Fix TypeDoc local source links and entrypoint handling"
+npm run ai:preflight -- "Fix TypeDoc local source links and entrypoint handling"
+npm run ai:graph:query -- "typedoc-source-config entryPointStrategy sourceLinkTemplate"
+```
 
-After install or config changes:
+## Final health gate
 
-```bash
+```powershell
 npm run typedoc:health
 npm run typedoc:json:local
 npm run typedoc:check-local
+npm run ai:graph:build
+npm run ai:graph:doctor
+npm run ai:graph:check-leaks
+npm run ai:history:status
+npm run ai:test:status
 ```
 
-A healthy local result means:
 
-```txt
-typedoc-api.json exists
-sourceUrlCount > 0
-githubBlobSourceUrlCount = 0
-```
+## TypeDoc-specific rule
 
----
+For public docs, use GitHub mode. For AI/local navigation, use local mode.
 
-## Expected non-fatal warnings
-
-These may be acceptable:
-
-```txt
-The glob api/**/*.tsx did not match any files
-SomeType is referenced by SomeFunction but not included in the documentation
-```
-
-They are not blockers if TypeDoc JSON is generated and `typedoc:check-local` passes.
-
----
-
-## Generated files
-
-Do not hand-edit generated output unless the task is specifically about generated docs:
-
-```txt
-typedoc-api.json
-typedoc.local.generated.json
-typedoc.github.generated.json
-docs/api-local/
-docs/api/
-```
-
-Regenerate through scripts.
-
----
-
-## Useful commands
-
-```bash
-npm run typedoc:health
+```powershell
 npm run typedoc:json:local
-npm run typedoc:json:github
-npm run typedoc:html:github
 npm run typedoc:check-local
-npm run typedoc:strict
-npm run typedoc:health:final
+npm run typedoc:html:github
 ```
+
+Local mode must not contain GitHub blob links. Public docs must not publish local `vscode://file` links.
